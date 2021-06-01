@@ -1,0 +1,25 @@
+<!--
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License.
+-->
+
+<launch>
+
+  <param name="robot_description"
+    command="xacro $(find azure_kinect_ros_driver)/urdf/azure_kinect.urdf.xacro" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+
+  <!-- Start rtabmap_ros node -->
+  <include file="$(find rtabmap_ros)/launch/rtabmap.launch" ns="rtabmap" >
+    <arg name="rgb_topic"          value="/k4a/rgb_to_depth/image_rect" />
+    <arg name="depth_topic"        value="/k4a/depth/image_rect" />
+    <arg name="camera_info_topic"  value="/k4a/depth/camera_info" />
+    <arg name="approx_sync"        value="true" />
+    <arg name="frame_id"           value="camera_base" />
+    <arg name="args"               value="--delete_db_on_start --Odom/ResetCountdown 2" />
+  </include>
+
+</launch>

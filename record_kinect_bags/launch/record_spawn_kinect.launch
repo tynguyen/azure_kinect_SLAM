@@ -1,0 +1,17 @@
+<launch>
+    <node pkg="rosbag" name="rosbag_record" type="record" output="screen" respawn="true"
+    args="--output-prefix $(env HOME)/bags/spawn_kinnect/
+        /k4a/rgb_to_depth/image_rect
+        /k4a/depth/image_rect 
+        /k4a/rgb_to_depth/camera_info
+        /k4a/rgb/camera_info
+        /k4a/ir/camera_info
+        /k4a/depth/camera_info
+        /k4a/imu
+        /imu/data
+        /tf
+        /clock
+        /joint_states
+        /tf_static"
+    />        
+</launch>
