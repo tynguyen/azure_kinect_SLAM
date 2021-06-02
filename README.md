@@ -16,6 +16,9 @@ Note: in order to run Azure without sudo, the following steps are necessary at t
 # Azure ROS Setup
 Follow [this link](https://vinesmsuic.github.io/2020/12/25/azure-kinect-ros-setup/#azure-kinect-ros-driver)
 
+# Build
+For now, use catkin_cmake
+
 # Record a Bag file
 ```
 cd record_kinnect_bags/launch
