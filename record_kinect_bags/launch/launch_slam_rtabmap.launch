@@ -11,14 +11,28 @@ Licensed under the MIT License.
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 
+  <!-- Convert raw IMU data to orientation -->
+  <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_node">
+   <param name="use_mag"       value="false"/>
+   <param name="publish_tf"    value="true"/>
+   <param name="world_frame"   value="enu"/>
+    // NEED TO FIX THIS
+   <!--param name="fixed_frame"   value="camera_base"/-->
+   <param name="reverse_tf"   value="false"/>
+   <remap from="/imu/data_raw" to="/k4a/imu"/>
+   <remap from="/imu/data"     to="/rtabmap/imu"/>
+  </node>
+
 
   <!-- Start rtabmap_ros node -->
   <include file="custom_rtabmap.launch" ns="rtabmap" >
     <arg name="rgb_topic"          value="/k4a/rgb_to_depth/image_rect" />
     <arg name="depth_topic"        value="/k4a/depth/image_rect" />
     <arg name="camera_info_topic"  value="/k4a/depth/camera_info" />
+    <arg name="imu_topic"  value="/rtabmap/imu" />
     <arg name="approx_sync"        value="true" />
     <arg name="frame_id"           value="camera_base" />
+    <arg name="wait_imu_to_init"   value="true" />
     <arg name="args"               value="--delete_db_on_start --Odom/ResetCountdown 2" />
   </include>
 
