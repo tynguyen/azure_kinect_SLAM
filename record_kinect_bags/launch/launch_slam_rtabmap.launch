@@ -13,7 +13,7 @@ Licensed under the MIT License.
 
 
   <!-- Start rtabmap_ros node -->
-  <include file="$(find rtabmap_ros)/launch/rtabmap.launch" ns="rtabmap" >
+  <include file="custom_rtabmap.launch" ns="rtabmap" >
     <arg name="rgb_topic"          value="/k4a/rgb_to_depth/image_rect" />
     <arg name="depth_topic"        value="/k4a/depth/image_rect" />
     <arg name="camera_info_topic"  value="/k4a/depth/camera_info" />
